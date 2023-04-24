@@ -1,0 +1,54 @@
+source_filename = "example.c"
+target datalayout = "e-m:o-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-apple-macosx10.15.0"
+define i32 @foo(i32 ) #0 {
+; <label> %1
+  
+  %2 = mul nsw i32 %0, 3
+  ret i32 %2
+  
+
+}
+attributes #0 = { norecurse nounwind readnone ssp uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "darwin-stkchk-strong-link" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "probe-stack"="___chkstk_darwin" "stack-protector-buffer-size"="8" "target-cpu"="penryn" "target-features"="+cx16,+fxsr,+mmx,+sahf,+sse,+sse2,+sse3,+sse4.1,+ssse3,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 10, i32 15]}
+!1 = !{i32 1, !"wchar_size", i32 4}
+!2 = !{i32 7, !"PIC Level", i32 2}
+!3 = !{!"Apple clang version 11.0.0 (clang-1100.0.33.16)"}
+
+Internal Coq representation of the ast:
+
+[TLE_Source_filename example.c; 
+TLE_Datalayout e-m:o-i64:64-f80:128-n8:16:32:64-S128; 
+TLE_Target x86_64-apple-macosx10.15.0; 
+TLE_Definition {|
+  df_prototype := {|dc_name := (Name "foo");
+                    dc_type := (TYPE_Function (TYPE_I 32%Z) [(TYPE_I 32%Z)]);
+                    dc_param_attrs := ([], []);
+                    dc_linkage := None;
+                    dc_visibility := None;
+                    dc_dll_storage := None;
+                    dc_cconv := None;
+                    dc_attrs := [FNATTR_Attr_grp 0%Z];
+                    dc_section := None;
+                    dc_align := None;
+                    dc_gc := None|};
+  df_args := [(Anon 0%Z)];
+  df_instrs := [
+                {|
+                  blk_id := (Anon 1%Z);
+                  blk_phis := [];
+                  blk_code := [(IId (Anon 2%Z), (INSTR_Op (OP_IBinop (Mul false true) (TYPE_I 32%Z) (EXP_Ident (ID_Local (Anon 0%Z))) (EXP_Integer (3)%Z))))];
+                  blk_term := TERM_Ret ((TYPE_I 32%Z), (EXP_Ident (ID_Local (Anon 2%Z))));
+                  blk_comments := None
+                |}
+                ]
+                |}; 
+TLE_Attribute_group 0%Z [FNATTR_Norecurse; FNATTR_Nounwind; FNATTR_Readnone; FNATTR_Ssp; FNATTR_Uwtable; FNATTR_Key_value (correctly-rounded-divide-sqrt-fp-math,false); FNATTR_String darwin-stkchk-strong-link; FNATTR_Key_value (disable-tail-calls,false); FNATTR_Key_value (less-precise-fpmad,false); FNATTR_Key_value (min-legal-vector-width,0); FNATTR_Key_value (no-frame-pointer-elim,true); FNATTR_String no-frame-pointer-elim-non-leaf; FNATTR_Key_value (no-infs-fp-math,false); FNATTR_Key_value (no-jump-tables,false); FNATTR_Key_value (no-nans-fp-math,false); FNATTR_Key_value (no-signed-zeros-fp-math,false); FNATTR_Key_value (no-trapping-math,false); FNATTR_Key_value (probe-stack,___chkstk_darwin); FNATTR_Key_value (stack-protector-buffer-size,8); FNATTR_Key_value (target-cpu,penryn); FNATTR_Key_value (target-features,+cx16,+fxsr,+mmx,+sahf,+sse,+sse2,+sse3,+sse4.1,+ssse3,+x87); FNATTR_Key_value (unsafe-fp-math,false); FNATTR_Key_value (use-soft-float,false)]; 
+TLE_Metadata (Name "llvm.module.flags") METADATA_Node [METADATA_Id (Anon 0%Z); METADATA_Id (Anon 1%Z); METADATA_Id (Anon 2%Z)]; 
+TLE_Metadata (Name "llvm.ident") METADATA_Node [METADATA_Id (Anon 3%Z)]; 
+TLE_Metadata (Anon 0%Z) METADATA_Node [METADATA_Const ((TYPE_I 32%Z), (EXP_Integer (2)%Z)); METADATA_String "SDK Version"; METADATA_Const ((TYPE_Array 2%Z (TYPE_I 32%Z)), (EXP_Array [((TYPE_I 32%Z),(EXP_Integer (10)%Z)); ((TYPE_I 32%Z),(EXP_Integer (15)%Z))]))]; 
+TLE_Metadata (Anon 1%Z) METADATA_Node [METADATA_Const ((TYPE_I 32%Z), (EXP_Integer (1)%Z)); METADATA_String "wchar_size"; METADATA_Const ((TYPE_I 32%Z), (EXP_Integer (4)%Z))]; 
+TLE_Metadata (Anon 2%Z) METADATA_Node [METADATA_Const ((TYPE_I 32%Z), (EXP_Integer (7)%Z)); METADATA_String "PIC Level"; METADATA_Const ((TYPE_I 32%Z), (EXP_Integer (2)%Z))]; 
+TLE_Metadata (Anon 3%Z) METADATA_Node [METADATA_String "Apple clang version 11.0.0 (clang-1100.0.33.16)"]].

@@ -1,0 +1,206 @@
+source_filename = "qutip_circuit"
+%Qubit = type opaque
+%Result = type opaque
+define void @main() #0 {
+entry:
+  
+  ; void instr 0
+  call void @__quantum__qis__h__body(%Qubit* inttoptr (i64 1 to %Qubit*))
+  ; void instr 1
+  call void @__quantum__qis__cnot__body(%Qubit* inttoptr (i64 1 to %Qubit*), %Qubit* inttoptr (i64 2 to %Qubit*))
+  ; void instr 2
+  call void @__quantum__qis__cnot__body(%Qubit* null, %Qubit* inttoptr (i64 1 to %Qubit*))
+  ; void instr 3
+  call void @__quantum__qis__h__body(%Qubit* null)
+  ; void instr 4
+  call void @__quantum__qis__mz__body(%Qubit* null, %Result* inttoptr (i64 1 to %Result*))
+  ; void instr 5
+  call void @__quantum__qis__mz__body(%Qubit* inttoptr (i64 1 to %Qubit*), %Result* null)
+  %0 = call i1 @__quantum__qis__read_result__body(%Result* null)
+  br i1 %0, label %then, label %else
+  
+then:
+  
+  ; void instr 6
+  call void @__quantum__qis__x__body(%Qubit* inttoptr (i64 2 to %Qubit*))
+  br label %continue
+  
+else:
+  
+  
+  br label %continue
+  
+continue:
+  
+  %1 = call i1 @__quantum__qis__read_result__body(%Result* inttoptr (i64 1 to %Result*))
+  br i1 %1, label %then1, label %else2
+  
+then1:
+  
+  ; void instr 7
+  call void @__quantum__qis__z__body(%Qubit* inttoptr (i64 2 to %Qubit*))
+  br label %continue3
+  
+else2:
+  
+  
+  br label %continue3
+  
+continue3:
+  
+  
+  ret void
+  
+}
+declare void @__quantum__qis__h__body(%Qubit*)
+declare void @__quantum__qis__cnot__body(%Qubit*, %Qubit*)
+declare void @__quantum__qis__mz__body(%Qubit*, %Result*)
+declare i1 @__quantum__qis__read_result__body(%Result*)
+declare void @__quantum__qis__x__body(%Qubit*)
+declare void @__quantum__qis__z__body(%Qubit*)
+attributes #0 = { "EntryPoint" "requiredQubits"="3" "requiredResults"="2" }
+
+Internal Coq representation of the ast:
+
+[TLE_Source_filename qutip_circuit; 
+TLE_Type_decl (ID_Local (Name "Qubit")) TYPE_Opaque; 
+TLE_Type_decl (ID_Local (Name "Result")) TYPE_Opaque; 
+TLE_Definition {|
+  df_prototype := {|dc_name := (Name "main");
+                    dc_type := (TYPE_Function TYPE_Void []);
+                    dc_param_attrs := ([], []);
+                    dc_linkage := None;
+                    dc_visibility := None;
+                    dc_dll_storage := None;
+                    dc_cconv := None;
+                    dc_attrs := [FNATTR_Attr_grp 0%Z];
+                    dc_section := None;
+                    dc_align := None;
+                    dc_gc := None|};
+  df_args := [];
+  df_instrs := [
+                {|
+                  blk_id := (Name "entry");
+                  blk_phis := [];
+                  blk_code := [(IVoid 0%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__h__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))))]));
+                               (IVoid 1%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__cnot__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))))); ((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (2)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))))]));
+                               (IVoid 2%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__cnot__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), EXP_Null); ((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))))]));
+                               (IVoid 3%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__h__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), EXP_Null)]));
+                               (IVoid 4%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__mz__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), EXP_Null); ((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result"))))))]));
+                               (IVoid 5%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__mz__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))))); ((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result")))), EXP_Null)]));
+                               (IId (Anon 0%Z), (INSTR_Call ((TYPE_I 1%Z), (EXP_Ident (ID_Global (Name "__quantum__qis__read_result__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result")))), EXP_Null)]))];
+                  blk_term := TERM_Br ((TYPE_I 1%Z), (EXP_Ident (ID_Local (Anon 0%Z)))) (Name "then") (Name "else");
+                  blk_comments := None
+                |}
+                {|
+                  blk_id := (Name "then");
+                  blk_phis := [];
+                  blk_code := [(IVoid 6%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__x__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (2)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))))]))];
+                  blk_term := TERM_Br_1 (Name "continue");
+                  blk_comments := None
+                |};
+                {|
+                  blk_id := (Name "else");
+                  blk_phis := [];
+                  blk_code := [];
+                  blk_term := TERM_Br_1 (Name "continue");
+                  blk_comments := None
+                |};
+                {|
+                  blk_id := (Name "continue");
+                  blk_phis := [];
+                  blk_code := [(IId (Anon 1%Z), (INSTR_Call ((TYPE_I 1%Z), (EXP_Ident (ID_Global (Name "__quantum__qis__read_result__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (1)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result"))))))]))];
+                  blk_term := TERM_Br ((TYPE_I 1%Z), (EXP_Ident (ID_Local (Anon 1%Z)))) (Name "then1") (Name "else2");
+                  blk_comments := None
+                |};
+                {|
+                  blk_id := (Name "then1");
+                  blk_phis := [];
+                  blk_code := [(IVoid 7%Z, (INSTR_Call (TYPE_Void, (EXP_Ident (ID_Global (Name "__quantum__qis__z__body")))) [((TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))), (OP_Conversion Inttoptr (TYPE_I 64%Z) (EXP_Integer (2)%Z) (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))))]))];
+                  blk_term := TERM_Br_1 (Name "continue3");
+                  blk_comments := None
+                |};
+                {|
+                  blk_id := (Name "else2");
+                  blk_phis := [];
+                  blk_code := [];
+                  blk_term := TERM_Br_1 (Name "continue3");
+                  blk_comments := None
+                |};
+                {|
+                  blk_id := (Name "continue3");
+                  blk_phis := [];
+                  blk_code := [];
+                  blk_term := TERM_Ret_void;
+                  blk_comments := None
+                |}]
+                |}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__h__body");
+                  dc_type := (TYPE_Function TYPE_Void [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))]);
+                  dc_param_attrs := ([], []);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__cnot__body");
+                  dc_type := (TYPE_Function TYPE_Void [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))); (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))]);
+                  dc_param_attrs := ([], [
+                  ]);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__mz__body");
+                  dc_type := (TYPE_Function TYPE_Void [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit")))); (TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result"))))]);
+                  dc_param_attrs := ([], [
+                  ]);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__read_result__body");
+                  dc_type := (TYPE_Function (TYPE_I 1%Z) [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Result"))))]);
+                  dc_param_attrs := ([], []);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__x__body");
+                  dc_type := (TYPE_Function TYPE_Void [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))]);
+                  dc_param_attrs := ([], []);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Declaration {|dc_name := (Name "__quantum__qis__z__body");
+                  dc_type := (TYPE_Function TYPE_Void [(TYPE_Pointer (TYPE_Identified (ID_Local (Name "Qubit"))))]);
+                  dc_param_attrs := ([], []);
+                  dc_linkage := None;
+                  dc_visibility := None;
+                  dc_dll_storage := None;
+                  dc_cconv := None;
+                  dc_attrs := [];
+                  dc_section := None;
+                  dc_align := None;
+                  dc_gc := None|}; 
+TLE_Attribute_group 0%Z [FNATTR_String EntryPoint; FNATTR_Key_value (requiredQubits,3); FNATTR_Key_value (requiredResults,2)]].
